@@ -9,9 +9,7 @@ def ntw(n):
     words = {0: 'ноль', 1: 'один', 2: 'два', 3: 'три', 4: 'четыре', 5: 'пять',
     6: 'шесть', 7: 'семь', 8: 'восемь', 9: 'девять'}
     return words.get(n)
-output_str = " "
 
-#l = [random.randint(1, 10000) for i in range(10)]
 list = [1, 20, 300, 455, 557, 6666, 7777]
 for i in range(len(list)):
     if list[i] % 2 != 0: #проверка на чётность
