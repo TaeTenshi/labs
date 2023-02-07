@@ -1,3 +1,6 @@
+'''Натуральные числа. Выводит на экран нечетные числа, содержащие четное количество цифр, превышающее К.
+Список используемых цифр (прописью) и их количество выводится отдельно.'''
+
 import random
 
 k = 1
@@ -7,7 +10,6 @@ def ntw(n):
     6: 'шесть', 7: 'семь', 8: 'восемь', 9: 'девять'}
     return words.get(n)
 output_str = " "
-list_num = []
 
 #l = [random.randint(1, 10000) for i in range(10)]
 list = [1, 20, 300, 455, 557, 6666, 7777]
@@ -15,13 +17,11 @@ for i in range(len(list)):
     if list[i] % 2 != 0: #проверка на чётность
         if len(str(list[i])) % 2 == 0: #проверка на чётность количества цифр в числе
             if len(str(list[i])) > k: #по условию цифр в числе больше k = 2
-                print(i)
                 a.append(list[i])
-print(list)
+print('Исходный список', list)
 print(a)
 for i in a:
     b = ''
     for j in str(i):
         b += ntw(int(j)) + ' '
-    print((str(i) + ' ' + b), len(str(i)))
-
+    print((str(i) + ' - ' + b), 'Количество цифр:', len(str(i)))
