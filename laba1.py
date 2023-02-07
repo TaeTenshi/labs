@@ -24,6 +24,8 @@ print('Получившийся список: ', a)
 for i in a:
     b = ''
     for j in str(i):
-        b += ntw(int(j)) + ' '
+        if str(i) not in b:
+            if ntw(int(j)) not in b:
+                b += ntw(int(j)) + ' '
     print((str(i) + ' - ' + b), 'Количество цифр:', len(str(i)))
 
