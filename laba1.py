@@ -21,6 +21,8 @@ for i in range(len(data)):
                 a.append(data[i])
 print('Исходный список: ', data)
 print('Получившийся список: ', a)
+if a == []:
+    print('Нет подходящих чисел')
 for i in a:
     b = ''
     for j in str(i):
@@ -28,4 +30,3 @@ for i in a:
             if ntw(int(j)) not in b:
                 b += ntw(int(j)) + ' '
     print((str(i) + ' - ' + b), 'Количество цифр:', len(str(i)))
-
