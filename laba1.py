@@ -16,7 +16,6 @@ with open('text.txt') as f:
     for i in file.split():
         if i.isdigit():
             data.append((int(i)))
-            print(data)
 
 for i in range(len(data)):
     if data[i] % 2 != 0: #проверка на чётность
