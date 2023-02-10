@@ -4,22 +4,27 @@
 k = 1
 a = []
 data = []
+data_int = []
 def ntw(n):
     words = {0: 'ноль', 1: 'один', 2: 'два', 3: 'три', 4: 'четыре', 5: 'пять',
     6: 'шесть', 7: 'семь', 8: 'восемь', 9: 'девять'}
     return words.get(n)
 
+
 with open('text.txt') as f:
     file = f.read()
     for i in file.split():
-        data.append(int(i))
+        if i.isdigit():
+            data.append((int(i)))
+            print(data)
 
 for i in range(len(data)):
     if data[i] % 2 != 0: #проверка на чётность
         if len(str(data[i])) % 2 == 0: #проверка на чётность количества цифр в числе
             if len(str(data[i])) > k: #по условию цифр в числе больше k = 1
                 a.append(data[i])
-print('Исходный список: ', data)
+                
+print('Исходный список чисел: ', data)
 print('Получившийся список: ', a)
 if a == []:
     print('Нет подходящих чисел')
