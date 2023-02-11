@@ -37,7 +37,7 @@ for i in data:
                 num.append(int(number))
 
 if len(num) == 0:
-    print('цифр нет')
+    print('Чисел нет')
     quit()
 
 for i in range(len(num)):
