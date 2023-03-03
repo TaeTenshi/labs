@@ -1,0 +1,47 @@
+'''Натуральные числа. Выводит на экран нечетные числа, содержащие четное количество цифр, превышающее К.
+Список используемых цифр (прописью) и их количество выводится отдельно.'''
+
+import re
+import sys
+
+a = []
+data = []
+num = []
+buffer_len = 1
+work_d = ''
+k = int(input('Введите минимальное количетсво цифр в числе: '))
+    
+def ntw(n):
+    words = {0: 'ноль', 1: 'один', 2: 'два', 3: 'три', 4: 'четыре', 5: 'пять',
+    6: 'шесть', 7: 'семь', 8: 'восемь', 9: 'девять'}
+    return words.get(n)
+
+file = open('text.txt','r')
+while True:
+    buffer = file.readline()
+    if buffer != '':
+        print('Исходная строка',buffer)
+    if not buffer:
+        if not False:
+            print('Файл закончился')
+        break
+    res = re.findall(r'\d+',buffer)
+    for j in res:
+        d = int(j, base = 10)
+        if d % 2 != 0: #проверка на чётность
+            if len(str(d)) >= k:
+                if len(str(d)) % 2 == 0: #проверка на чётность количесва цифр
+                    a.append(d)
+
+if len(a) == 0:
+    print('Нет подходящих под условия чисел')
+    sys.exit()
+print('Cписок чисел подходящих под условия: ', a)
+  
+for i in a:
+    b = ''
+    for j in str(i):
+        if str(i) not in b:
+            if ntw(int(j)) not in b:
+                b += ntw(int(j)) + ' '
+    print((str(i) + ' - ' + b), 'Количество цифр:', len(str(i)))
