@@ -1,0 +1,166 @@
+'''
+С клавиатуры вводится два числа K и N. Квадратная матрица А(N,N), состоящая из 4-х равных по размерам подматриц, B,C,D,E заполняется случайным
+образом целыми числами в интервале [-10,10]. Для тестирования использовать не случайное заполнение, а целенаправленное.
+
+16.	Формируется матрица F следующим образом: если в Е минимальный элемент в нечетных столбцах в области 1 больше, чем сумма чисел в нечетных
+строках в области 3, то поменять в В симметрично области 3 и 2 местами, иначе В и Е поменять местами несимметрично. При этом матрица А не меняется.
+После чего вычисляется выражение: (К*F)*А– K*AT . Выводятся по мере формирования А, F и все матричные операции последовательно.
+
+  E B              1
+  D C            4   2
+                   3
+'''
+
+import random
+
+K = int(input('Введите K: '))
+N = int(input('Введите N: '))
+if (N % 2 != 0) or ((N / 2) % 2 == 0) or ((N / 2) < 3):
+    print('N должно быть четным и чтобы число N/2 было нечетным и больше или равно 3')
+    exit()
+
+B, C, D, E = [], [], [], []
+n = N // 2  # размерность матриц (n x n)
+for row in range(n):
+    row_b, row_c, row_d, row_e = [], [], [], []
+    for col in range(n):
+        row_b.append(random.randint(-10, 10))
+        row_c.append(random.randint(-10, 10))
+        row_d.append(random.randint(-10, 10))
+        row_e.append(random.randint(-10, 10))
+    B.append(row_b)
+    C.append(row_c)
+    D.append(row_d)
+    E.append(row_e)
+
+A = []
+for i in range(n):
+    A.append(E[i] + B[i])
+
+for i in range(n):
+    A.append(D[i] + C[i])
+
+
+def output(a, n):
+    for i in range(n):
+        print(a[i])
+
+# печатаем матрицы E, B, C, D, A
+print('Матрица E:')
+output(E, n)
+
+min_num_area1 = max(map(max, E)) + 1
+sum_uneven_nums_area3 = 0
+# ищем минимальное число в матрице Е в нечетных столбцах в области 1
+for i in range((n // 2) + 1):
+    for j in range(i, n - i):
+        if (j + 1) % 2 != 0:
+#            print(j + 1, E[i][j])
+            if (E[i][j]) <= min_num_area1:  # если число меньше то присваиваем
+                min_num_area1 = E[i][j]
+print('Минимальное число в нечетных столбцах в области 1: ', min_num_area1)
+
+# ищем сумму чисел в нечетных строках в области 3
+for i in range(n + 1):
+    for j in range(n - i - 1, i + 1):
+        if (i + 1) % 2 != 0: # считаем, что нумерация строк начинается с 1
+            #print(i + 1, E[i][j])
+            sum_uneven_nums_area3 += E[i][j]
+print('Сумма чисел в нечетных строках в области 3: ', sum_uneven_nums_area3)
+
+print('Матрица B:')
+output(B, n)
+print('Матрица C:')
+output(C, n)
+print('Матрица D:')
+output(D, n)
+print('Матрица A:')
+output(A, N)
+
+F = []
+if min_num_area1 > sum_uneven_nums_area3: #то поменять в В симметрично области 3 и 2 местами, иначе В и Е поменять местами несимметрично.
+    for j in range(1, n - 1):  # симметрично меняем области 2 и 3 относительно диагонали
+        if j <= n // 2:
+            a = n - j - 1
+        else:
+            a = j
+        for i in range(n - 1, a, -1):
+            temp = B[i][j]
+            B[j][j] = B[j][i]
+            B[j][i] = temp
+    print('Матрица B после изменений:')
+    for i in range(n):
+        print(B[i])
+    # формируем матрицу F
+    for i in range(n):
+        F.append(E[i] + B[i])
+    for i in range(n):
+        F.append(D[i] + C[i])
+
+else:  # если условие не выполнено
+            # формируем матрицу F, меняем B и E несимметрично местами
+            for i in range(n):
+                F.append(C[i] + B[i])
+            for i in range(n):
+                F.append(D[i] + E[i])
+
+print('Матрица F:')
+output(F, N)
+
+#(К*F)*А– K*AT
+KF = F
+for i in range(N):
+    for j in range(N):
+        KF[i][j] = K * KF[i][j]
+print('Матрица K*F: ',)
+output(KF, N)
+
+KF_mult_A = []
+for row in range(0, N):
+    l = []
+    for i in range(0, N):
+        sum = 0
+        for j in range(0, N):
+            sum += KF[row][j] * A[j][i]
+        l.append(sum)
+    KF_mult_A.append(l)
+print('Матрица KF*A: ')
+output(KF_mult_A, N)
+
+A_transpose = []
+for i in range(N):
+    A_transpose_row = []  # транспонированная матрица A
+    for j in range(N):
+        A_transpose_row.append(A[j][i])
+    A_transpose.append(A_transpose_row)
+
+print('Транспонированная матрица A: ')
+for i in range(N):
+    print(A_transpose[i])
+
+A_transpose_mult_K = []  # матрица с результатом умножения K * Aт
+for i in range(N):
+    cur_row = []
+    for j in range(N):
+        cur_row.append(0)
+    A_transpose_mult_K.append(cur_row)  # формируем пустую матрицу, чтобы была возможность доступа к элементам матрицы по индексам
+
+for i in range(N):
+    for j in range(N):
+        A_transpose_mult_K[i][j] = K * A_transpose[i][j]  # транспонированная матрица А умноженная на константу К
+print('Транспонированная матрица A умноженная на K: ')
+output(A_transpose_mult_K, N)
+
+result_matrix = []  # результирующая матрица
+for i in range(N):  # формируем пустую матрицу, чтобы была возможность доступа к элементам матрицы по индексам
+    cur_row = []
+    for j in range(N):
+        cur_row.append(0)
+    result_matrix.append(cur_row)
+
+for i in range(N):
+    for j in range(N):
+        result_matrix[i][j] = KF_mult_A[i][j] - A_transpose_mult_K[i][j]
+
+print('Результат: ')
+output(result_matrix, N)
