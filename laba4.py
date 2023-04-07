@@ -12,8 +12,8 @@ import numpy as np
 from matplotlib import pyplot as plt
 import seaborn as sns
 
-K = 3 #int(input('Введите K: '))
-N = 10 #int(input('Введите N: '))
+K = int(input('Введите K: '))
+N = int(input('Введите N: '))
 if (N % 2 != 0) or ((N / 2) % 2 == 0) or ((N / 2) < 3):
     print('N должно быть четным и чтобы число N/2 было нечетным и больше или равно 3')
     exit()
