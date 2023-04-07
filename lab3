@@ -55,7 +55,6 @@ sum_uneven_nums_area3 = 0
 for i in range((n // 2) + 1):
     for j in range(i, n - i):
         if (j + 1) % 2 != 0:
-#            print(j + 1, E[i][j])
             if (E[i][j]) <= min_num_area1:  # если число меньше то присваиваем
                 min_num_area1 = E[i][j]
 print('Минимальное число в нечетных столбцах в области 1: ', min_num_area1)
@@ -89,8 +88,7 @@ if min_num_area1 > sum_uneven_nums_area3: #то поменять в В симм�
             B[j][j] = B[j][i]
             B[j][i] = temp
     print('Матрица B после изменений:')
-    for i in range(n):
-        print(B[i])
+    output(B, n)
     # формируем матрицу F
     for i in range(n):
         F.append(E[i] + B[i])
