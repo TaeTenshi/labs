@@ -13,9 +13,9 @@ import matplotlib.pyplot as plt
 def F_rec(n):
     if n == 1:
         return 1
-    elif n % 2 == 0 and n > 1:
+    elif n % 2 == 0:
         return F_rec(n - 1)*(n + 1)
-    elif n % 2 != 0 and n > 1:
+    elif n % 2 != 0:
         return factorial(n)
 
 # итерационно
