@@ -22,17 +22,23 @@ def F_rec(n):
 def F_iter(n):
     if n == 1: # F(1) = 1
         return 1
-    elif n % 2 == 0 and n > 1: # F(n) = F(n – 1) * (n + 1)
+    elif n % 2 == 0: # F(n) = F(n – 1) * (n + 1)
+        b = 1
+        n1 = n - 1
+        while n1 > 1:
+            b *= n1
+            n1 -= 1
+        с = 1
         for i in range(2, n + 1, 2):
-            a = 1
-            a *= F_rec(n - 1)*(n + 1)
-        return a
-    elif n % 2 != 0 and n > 1: # F(n)=n!
-        a = 1
+            a = b * (n + 1)
+            с = a
+        return с
+    elif n % 2 != 0: # F(n)=n!
+        b = 1
         while n > 1:
-            a *= n
+            b *= n
             n -= 1
-        return a
+        return b
 
 # ввод числа n
 n = int(input("Введите число n: "))
