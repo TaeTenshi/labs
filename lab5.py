@@ -19,26 +19,22 @@ def F_rec(n):
         return factorial(n)
 
 # итерационно
-def F_iter(n):
-    if n == 1: # F(1) = 1
-        return 1
-    elif n % 2 == 0: # F(n) = F(n – 1) * (n + 1)
-        b = 1
-        n1 = n - 1
-        while n1 > 1:
-            b *= n1
-            n1 -= 1
-        с = 1
-        for i in range(2, n + 1, 2):
-            a = b * (n + 1)
-            с = a
-        return с
-    elif n % 2 != 0: # F(n)=n!
+ef F_iter(n):
+    if n % 2 != 0: # F(n)=n!
         b = 1
         while n > 1:
             b *= n
             n -= 1
         return b
+    elif n % 2 == 0: # F(n) = F(n – 1) * (n + 1)
+        b, n1, c = 1, (n - 1), 1
+        while n1 > 1:
+            b *= n1
+            n1 -= 1
+        for i in range(2, n + 1, 2):
+            a = b * (n + 1)
+            с = a
+        return с
 
 # ввод числа n
 n = int(input("Введите число n: "))
