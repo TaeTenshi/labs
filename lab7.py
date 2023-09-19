@@ -33,8 +33,8 @@ class PointCombos:
                     valid_combos.append(combo)
         return valid_combos
 
-side = int(input('Введите длину стороны плоскости'))  # Длина стороны квадрата
-k = int(input('Введите количество точек'))  # Количество точек
+side = int(input('Введите длину стороны плоскости '))  # Длина стороны квадрата
+k = int(input('Введите количество точек '))  # Количество точек
 
 points = []
 for i in range(k):
