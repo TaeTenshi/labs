@@ -102,12 +102,4 @@ class Programma():
                 else:
                     return False
 
-    # def feedback_wrong(self):
-    #     self.root_feedback = Tk()
-    #     self.root_feedback.eval('tk::PlaceWindow . center')
-    #     self.root_feedback.title("Ошибка")
-    #     self.label_password = Label(self.root_feedback, text="Логин не может быть пустым")
-    #     self.label_password.pack()
-    #     self.root_feedback.mainloop()
-
 program = Programma()
