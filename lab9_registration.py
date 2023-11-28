@@ -1,4 +1,5 @@
 from tkinter import *
+import re
 
 
 class Programma():
@@ -89,9 +90,6 @@ class Programma():
         self.label_password.pack()
         self.root_feedback.mainloop()
 
-
-
-
     def check_user(self, username, password):
         with open("Users.txt", "r") as file:
             users = file.readlines()
@@ -101,7 +99,15 @@ class Programma():
                 user_data = user.split(":")
                 if user_data[0] == username and user_data[1] == password:
                     return True
+                else:
+                    return False
 
-        return False
+    # def feedback_wrong(self):
+    #     self.root_feedback = Tk()
+    #     self.root_feedback.eval('tk::PlaceWindow . center')
+    #     self.root_feedback.title("Ошибка")
+    #     self.label_password = Label(self.root_feedback, text="Логин не может быть пустым")
+    #     self.label_password.pack()
+    #     self.root_feedback.mainloop()
 
 program = Programma()
