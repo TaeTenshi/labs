@@ -36,19 +36,23 @@ class Programma():
         self.label_feedback.pack()
         self.root.mainloop()
 
-    def log_in(self):
-        username = self.entry_username.get()
+        def log_in(self):
+        username = self.entry_username.get().strip()  
+
+        if " " in username:  
+            self.label_feedback.config(text="Логин не может содержать пробелы")
+            return
+
         password = self.entry_password.get()
 
         if self.check_user(username, password):
             self.feedback(self.root)
-
         else:
             self.label_feedback.config(text="Неверное имя пользователя или пароль")
 
     def register(self):
         self.root.withdraw()
-        self.root_reg = Tk()
+        self.root_reg = tk.Tk()
         self.root_reg.title("Регистрация")
         self.root_reg.geometry('350x250')
         self.root_reg.eval('tk::PlaceWindow . center')
