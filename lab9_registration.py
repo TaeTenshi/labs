@@ -2,7 +2,7 @@ import tkinter as tk
 
 
 class Programma():
-    open("Users.txt", "w").close()
+    open("Users.txt", "a").close()
 
     def __init__(self):
         # window sign in
