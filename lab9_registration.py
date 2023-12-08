@@ -53,6 +53,7 @@ class Programma():
         self.root_reg.geometry('350x250')
         self.root_reg.eval('tk::PlaceWindow . center')
 
+
         self.label_username = Label(self.root_reg, text="Имя пользователя:")
         self.label_username.pack()
         self.entry_username = Entry(self.root_reg)
@@ -66,6 +67,9 @@ class Programma():
         self.reg_button = Button(self.root_reg, text="Создать аккаунт", command=self.check_acc)
         self.reg_button.pack()
 
+        self.label_feedback = tk.Label(self.root_reg, text="")
+        self.label_feedback.pack()
+
     def check_acc(self):
         username_reg = self.entry_username.get()
         password_reg = self.entry_password.get()
@@ -73,9 +77,14 @@ class Programma():
         with open("Users.txt", mode="r") as users:
             existing_usernames = [line.split(":")[0] for line in users.readlines()]
 
-        if username_reg in existing_usernames:
-            self.label_feedback = Label(self.root_reg, text="Этот логин уже занят")
-            self.label_feedback.pack()
+        if " " in username_reg:
+            self.label_feedback.config(text="Логин не может содержать пробелы")
+        elif username_reg in existing_usernames:
+            self.label_feedback.config(text="Этот логин уже занят")
+        elif username_reg == "" or password_reg == "":
+            self.label_feedback.config(text="Поле не может быть пустым")
+        elif " " in password_reg:
+            self.label_feedback.config(text="Пароль не может содержать пробелы")
         else:
             with open("Users.txt", mode="a") as users:
                 users.write(f"{username_reg}:{password_reg}\n")
