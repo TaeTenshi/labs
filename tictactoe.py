@@ -11,6 +11,7 @@ class TicTacToe:
         self.buttons = []
 
         self.current_player = "X"
+        self.depth_limit = 3  # ограничение глубины
 
         for row in range(3):
             self.board.append([])
@@ -100,7 +101,7 @@ class TicTacToe:
         if self.check_winner():
             return scores[self.current_player]
 
-        if self.check_draw():
+        if self.check_draw() or depth == self.depth_limit::
             return scores["draw"]
 
         if is_maximizing:
