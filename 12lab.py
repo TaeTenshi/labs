@@ -4,7 +4,10 @@ n - номер слагаемого. Сумма считается вычисл�
 import numpy as np
 
 def factorial(n):
-    return np.prod(np.arange(1, n + 1, dtype=np.float128))
+    result = 1
+    for i in range(1, n + 1):
+        result *= i
+    return result
 
 
 def calculate_term(x, n, factorial_n):
