@@ -8,7 +8,9 @@ def factorial(n):
 
 
 def calculate_term(x, n, factorial_n):
-    return ((x ** n) / factorial_n) * ((-1) ** (n - 1))
+    rx_n = (x ** n)
+    det_x_n = np.linalg.det(x_n)
+    return ((det_x_n) / factorial_n) * ((-1) ** (n - 1))
 
 
 def alternating_series_sum(X, t):
