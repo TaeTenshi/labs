@@ -68,7 +68,7 @@ class RussianCheckers:
                         self.turn_player = not self.turn_player
                         if self.check_win(self.turn_player):
                             if self.turn_player:
-                                result = askyesno(title="Информация", message="Победили Афроамериканские.\n Начать новую игру?")
+                                result = askyesno(title="Информация", message="Победили белые.\n Начать новую игру?")
                                 if result:
                                     self.root.destroy()
                                     root = tk.Tk()
@@ -76,7 +76,7 @@ class RussianCheckers:
                                 else:
                                     exit()
                             elif self.turn_player:
-                                result = askyesno(title="Информация", message="Победили белые.\n Начать новую игру?")
+                                result = askyesno(title="Информация", message="Победили красные.\n Начать новую игру?")
                                 if result:
                                     self.root.destroy()
                                     root = tk.Tk()
